@@ -36,11 +36,9 @@ def insert(csv_file, conn) -> None:
     cursor = conn.cursor()
     df = pd.read_csv(csv_file)
 
-    # remove some cols as they don't exist in db table atm
-    df.drop(["R code", "Organisation ID"], axis=1, inplace=True)
-
-    # rename col to match with col in INCA
-    df.rename(columns={"Ref genome": "Ref_genome"}, inplace=True)
+    # rename cols to match with col in INCA
+    df.rename(columns={"Ref genome": "Ref_genome", "R code": "Rcode",
+                       "Organisation ID": "OrganisationID"}, inplace=True)
 
     # loop for each row in df
     for i in range(df.shape[0]):
